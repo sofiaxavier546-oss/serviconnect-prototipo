@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#ff5a36">
+  <meta name="description" content="Protótipo do marketplace ServiConnect">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="css/style.css">
+  <title>ServiConnect | Serviços perto de você</title>
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="#inicio" aria-label="ServiConnect - início"><span class="brand-mark">S</span><span data-brand>ServiConnect</span></a>
+  <nav class="nav" aria-label="Navegação principal">
+    <a href="#inicio">Início</a><a href="#categorias">Categorias</a><a href="#profissionais">Profissionais</a>
+  </nav>
+  <div class="header-actions">
+    <button class="btn btn-light" id="renameBtn" type="button">Editar nome</button>
+    <button class="btn btn-primary" data-open="serviceModal" type="button">Solicitar serviço</button>
+  </div>
+</header>
+
+<main>
+<section class="hero" id="inicio">
+  <div class="hero-copy">
+    <span class="eyebrow">Manutenção sem complicação</span>
+    <h1>Encontre profissionais de confiança perto de você.</h1>
+    <p>Compare avaliação, distância, preço justo e tempo estimado antes de escolher.</p>
+    <div class="hero-actions"><button class="btn btn-primary btn-lg" data-open="serviceModal" type="button">Pedir um serviço</button><a class="btn btn-light btn-lg" href="#profissionais">Ver profissionais</a></div>
+    <div class="trust-row"><span>✓ Preço controlado</span><span>✓ Profissionais verificados</span><span>✓ Avaliação pública</span></div>
+  </div>
+  <div class="live-card">
+    <div class="map-mock" aria-label="Mapa ilustrativo com profissionais próximos">
+      <span class="street s1"></span><span class="street s2"></span><span class="street s3"></span>
+      <span class="pin p1">⚡</span><span class="pin p2">🔧</span><span class="pin p3">🧹</span><span class="user-pin">Você</span>
+    </div>
+    <div class="nearby"><strong>7 profissionais disponíveis</strong><span>na sua região agora</span></div>
+  </div>
+</section>
+
+<section class="section" id="categorias">
+  <div class="section-head"><div><span class="eyebrow">O que você precisa?</span><h2>Categorias populares</h2></div><button class="link-button" id="showAllCategories" type="button">Ver todas</button></div>
+  <div class="category-grid" id="categoryGrid"></div>
+</section>
+
+<section class="section soft-section" id="profissionais">
+  <div class="section-head"><div><span class="eyebrow">Comparação transparente</span><h2>Profissionais disponíveis</h2></div><label class="sort">Ordenar <select id="sortSelect"><option value="score">Recomendados</option><option value="price">Menor preço</option><option value="distance">Mais próximos</option><option value="rating">Melhor avaliação</option></select></label></div>
+  <div class="pro-grid" id="professionalGrid"></div>
+</section>
+
+<section class="section dashboard-section">
+  <div class="section-head"><div><span class="eyebrow">Demonstração</span><h2>Painel do cliente</h2></div></div>
+  <div class="dashboard">
+    <aside class="side-card"><div class="avatar">SX</div><h3>Olá, Sofia</h3><p>Cliente demonstrativo</p><button class="side-link active">Visão geral</button><button class="side-link">Meus serviços</button><button class="side-link">Mensagens <b>2</b></button><button class="side-link">Favoritos</button></aside>
+    <div class="dashboard-main">
+      <div class="stat-grid"><article><span>Solicitados</span><strong id="requestedCount">3</strong><small>este mês</small></article><article><span>Em andamento</span><strong>1</strong><small class="green">Prestador a caminho</small></article><article><span>Concluídos</span><strong>8</strong><small>total</small></article><article><span>Cupons</span><strong>2</strong><small>disponíveis</small></article></div>
+      <article class="tracking-card"><div><span class="status">A CAMINHO</span><h3>Instalação de chuveiro</h3><p>João Elétrica • chegada estimada em 18 min</p></div><div class="progress"><i style="width:64%"></i></div><div class="tracking-actions"><button class="btn btn-dark" id="chatBtn" type="button">Abrir chat</button><button class="btn btn-light" type="button">Ver detalhes</button></div></article>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer><div class="brand"><span class="brand-mark">S</span><span data-brand>ServiConnect</span></div><p>Protótipo demonstrativo. Nenhum pagamento ou contratação real é realizado.</p></footer>
+
+<div class="modal" id="serviceModal" hidden>
+ <div class="modal-backdrop" data-close="serviceModal"></div>
+ <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <button class="modal-close" data-close="serviceModal" aria-label="Fechar" type="button">×</button>
+  <div class="steps"><span class="active" data-step-dot="1">1</span><i></i><span data-step-dot="2">2</span><i></i><span data-step-dot="3">3</span></div>
+  <form id="serviceForm">
+   <section class="form-step active" data-step="1"><span class="eyebrow">Etapa 1 de 3</span><h2 id="modalTitle">Qual serviço você precisa?</h2><label>Categoria<select id="serviceType" required><option value="">Selecione</option></select></label><label>Descrição<textarea id="description" rows="4" placeholder="Conte brevemente o que aconteceu" required></textarea></label><label>Urgência<select id="urgency"><option value="0">Normal</option><option value="30">Prioritária (+ R$ 30)</option><option value="60">Emergencial (+ R$ 60)</option></select></label></section>
+   <section class="form-step" data-step="2"><span class="eyebrow">Etapa 2 de 3</span><h2>Local e complexidade</h2><div class="form-row"><label>CEP<input id="cep" inputmode="numeric" maxlength="9" placeholder="00000-000" required></label><label>Número<input id="number" maxlength="10" required></label></div><label>Endereço<input id="address" placeholder="Rua, bairro e cidade" required></label><label>Complexidade<select id="complexity"><option value="1">Nível 1 - Simples</option><option value="1.25">Nível 2 - Intermediário</option><option value="1.5">Nível 3 - Complexo</option><option value="2">Nível 4 - Especialista</option></select></label><label class="check"><input type="checkbox" id="specialTime"> Atendimento noturno, domingo ou feriado (+ R$ 40)</label></section>
+   <section class="form-step" data-step="3"><span class="eyebrow">Etapa 3 de 3</span><h2>Estimativa transparente</h2><div class="estimate"><span>Preço de referência</span><strong id="referencePrice">R$ 0,00</strong><p>Faixa permitida: <b id="priceRange">R$ 0,00 a R$ 0,00</b></p></div><div class="summary" id="requestSummary"></div><p class="notice">Os valores são simulados para demonstração. O protótipo não cria uma contratação real.</p></section>
+   <div class="form-actions"><button class="btn btn-light" id="backBtn" type="button" hidden>Voltar</button><button class="btn btn-primary" id="nextBtn" type="button">Continuar</button><button class="btn btn-primary" id="finishBtn" type="submit" hidden>Buscar profissionais</button></div>
+  </form>
+ </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="js/dados.js"></script><script src="js/app.js"></script>
+</body></html>
